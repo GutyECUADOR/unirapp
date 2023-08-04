@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { WelcomePage } from '../pages/WelcomePage';
+import { LoginPage } from '../pages/LoginPage';
 import { ProductosPage } from '../pages/ProductosPage';
 import { PedidosPage } from '../pages/PedidosPage';
 import { ClientesPage } from '../pages/ClientesPage';
@@ -20,6 +21,7 @@ export const AppRouter = () => {
             <Navbar toggleMenu={toggleMenu}></Navbar>
             <Routes>
                 <Route path="/" element={<WelcomePage/>}></Route>
+                <Route path="/login" element={<LoginPage/>} ></Route>
                 <Route path="/productos" element={<ProductosPage/>} ></Route>
                 <Route path="/pedidos" element={<PedidosPage/>} ></Route>
                 <Route path="/clientes" element={<ClientesPage/>} ></Route>

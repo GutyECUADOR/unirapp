@@ -1,6 +1,7 @@
 
 import '../../styles/Navbar.css';
 import { Clock } from '../Clock';
+import { NavLink } from 'react-router-dom';
 
 type NavbarPropTypes = {
   toggleMenu: () => void
@@ -37,7 +38,10 @@ export const Navbar = ({toggleMenu}: NavbarPropTypes) => {
                     </a>
                     <ul className="dropdown-menu dropdown-menu-end">
                       <li><a className="dropdown-item" href="#/">Configuraciones</a></li>
-                      <li><a className="dropdown-item" href="#/">Cerrar Sesion</a></li>
+                       
+                      <li>
+                        <NavLink to="/login" className="dropdown-item">Cerrar Sesion</NavLink>
+                      </li>
                     </ul>
                   </div>
                 </li>
