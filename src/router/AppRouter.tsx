@@ -1,7 +1,6 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { WelcomePage } from '../pages/WelcomePage';
-import { LoginPage } from '../pages/LoginPage';
+
 import { ProductosPage } from '../pages/ProductosPage';
 import { PedidosPage } from '../pages/PedidosPage';
 import { ClientesPage } from '../pages/ClientesPage';
@@ -14,14 +13,13 @@ import { useToggle } from './../hooks/useToogle';
 export const AppRouter = () => {
   const {isActive, toggleMenu} = useToggle(false);
   return (
-    <BrowserRouter>
+   
       <div id="wrapper" className={isActive ? 'd-flex toggled': 'd-flex'} >
           <MainSidebar></MainSidebar>
           <div id="page-content-wrapper">
             <Navbar toggleMenu={toggleMenu}></Navbar>
             <Routes>
                 <Route path="/" element={<WelcomePage/>}></Route>
-                <Route path="/login" element={<LoginPage/>} ></Route>
                 <Route path="/productos" element={<ProductosPage/>} ></Route>
                 <Route path="/pedidos" element={<PedidosPage/>} ></Route>
                 <Route path="/clientes" element={<ClientesPage/>} ></Route>
@@ -30,6 +28,5 @@ export const AppRouter = () => {
             </Routes>
         </div>
       </div>
-    </BrowserRouter>
   )
 }
