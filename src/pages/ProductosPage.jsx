@@ -3,8 +3,14 @@ import productos from './../data/productos.json';
 import { CardProducto } from './../components/CardProducto';
 import { Breadcrumb } from './../components/common/Breadcrumb';
 import { Search } from '../components/common/Search';
+import app from '../config/firebase';
+import 'firebase/compat/auth';
 
 export const ProductosPage = () => {
+  app.auth().onAuthStateChanged(user => {
+    console.log(user);
+  })
+
   return (
     <>
       <div className="container-fluid">
