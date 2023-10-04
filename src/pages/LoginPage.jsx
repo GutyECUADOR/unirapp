@@ -1,17 +1,29 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../context/UserContext";
 import '../styles/signin.css'; 
 import logo from './../svg/logoarbol.svg';
+import { AuthContext } from "../Auth/context/AuthContext";
 
 export const LoginPage = () => {
-  //const { user, setUser } = useContext(UserContext);
+  
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('')
+  const { loginHandler } = useContext(AuthContext);
   const navigate = useNavigate();
 
 
-  const handleLogin = () => {
-    //setUser({id:'123', nombre: 'José Gutiérrez'})
+  const handleLogin = async () => {
+    await loginHandler(email, password)
     navigate("/");
+  }
+
+  const handleInputEmail = (event) =>{
+    setEmail(event.target.value);
+  }
+
+  const handleInputPassword = (event) =>{
+    setPassword(event.target.value);
   }
 
   return (
@@ -22,11 +34,11 @@ export const LoginPage = () => {
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
     
         <div className="form-floating">
-          <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+          <input type="email" className="form-control" id="floatingInput" value={email} onChange={handleInputEmail}/>
           <label htmlFor="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
-          <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
+          <input type="password" className="form-control" id="floatingPassword" value={password} onChange={handleInputPassword}/>
           <label htmlFor="floatingPassword">Password</label>
         </div>
     

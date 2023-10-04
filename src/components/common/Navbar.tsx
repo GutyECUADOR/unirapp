@@ -1,13 +1,24 @@
 
+import { useContext } from 'react';
 import '../../styles/Navbar.css';
 import { Clock } from '../Clock';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../../Auth/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 type NavbarPropTypes = {
   toggleMenu: () => void
 }
 
 export const Navbar = ({toggleMenu}: NavbarPropTypes) => {
+
+  const navigate = useNavigate();
+  const { authState, logoutHandler } = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    await logoutHandler(); 
+    navigate("/login");
+  }
 
   return (
     <>
@@ -22,14 +33,19 @@ export const Navbar = ({toggleMenu}: NavbarPropTypes) => {
             <div className="collapse navbar-collapse navbar-right" id="navbarNav">
             <ul className="navbar-nav">
                 <li className="nav-item">
-                <a className="nav-link text-end" href="#/">
-                  <i className="fa-solid fa-clock"></i> <Clock></Clock>
-                </a>
+                  <a className="nav-link text-end" href="#/">
+                    <i className="fa-solid fa-clock"></i> Bienvenido, {authState.user.nombre}
+                  </a>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link text-end" href="#/">
-                  <i className="fa-solid fa-question-circle"></i> Ayuda
-                </a>
+                  <a className="nav-link text-end" href="#/">
+                    <i className="fa-solid fa-clock"></i> <Clock></Clock>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-end" href="#/">
+                    <i className="fa-solid fa-question-circle"></i> Ayuda
+                  </a>
                 </li>
                 <li className="nav-item">
                   <div className="dropdown">
@@ -40,7 +56,7 @@ export const Navbar = ({toggleMenu}: NavbarPropTypes) => {
                       <li><a className="dropdown-item" href="#/">Configuraciones</a></li>
                        
                       <li>
-                        <NavLink to="/login" className="dropdown-item">Cerrar Sesion</NavLink>
+                        <NavLink to="/login" onClick={handleLogout} className="dropdown-item">Cerrar Sesion</NavLink>
                       </li>
                     </ul>
                   </div>
